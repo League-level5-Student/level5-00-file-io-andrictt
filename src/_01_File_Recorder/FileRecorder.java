@@ -14,7 +14,7 @@ public class FileRecorder {
 		String hey = scan.nextLine();
 		
 		try {
-			FileWriter fw = new FileWriter("src/_00_Intro_To_File_Input_and_Output/test3.txt");
+			FileWriter fw = new FileWriter("src/_01_File_Recordertest3.txt");
 			
 			fw.write(hey);
 				
