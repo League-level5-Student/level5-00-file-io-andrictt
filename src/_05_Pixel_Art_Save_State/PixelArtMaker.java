@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class PixelArtMaker implements MouseListener{
 	private JFrame window;
 	private GridInputPanel gip;
-	private GridPanel gp;
+	private static GridPanel gp;
 	private JPanel jp;
 	ColorSelectionPanel csp;
 	
@@ -71,4 +71,8 @@ public class PixelArtMaker implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 	}
 
+	public static void paint()
+	{
+		gp.repaint();
+	}
 }

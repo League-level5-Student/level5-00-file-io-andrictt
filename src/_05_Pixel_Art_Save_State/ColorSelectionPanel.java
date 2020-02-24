@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Hashtable;
 
 import javax.swing.ImageIcon;
@@ -139,11 +144,47 @@ public class ColorSelectionPanel extends JPanel implements ActionListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == saveButton) {
+		if(e.getSource() == saveButton)
+		{
+			System.out.println("save img");
 			
+			try {
+				FileOutputStream file = new FileOutputStream("src/_05_Pixel_Art_Save_State/ image.img");
+				ObjectOutputStream out = new ObjectOutputStream(file);
+				out.writeObject(GridPanel.pixels);
+				out.close();
+				file.close();
+				System.out.println("serialized");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
-		if(e.getSource() == loadButton) {
+		else if(e.getSource() == loadButton)
+		{
+			System.out.println("load img");
 			
+			load: try {
+				FileInputStream file = new FileInputStream("src/_05_Pixel_Art_Save_State/ image.img");
+				ObjectInputStream in = new ObjectInputStream(file);
+				Pixel[][] tmp = (Pixel[][]) in.readObject();
+				if(tmp.length != GridPanel.pixels.length)
+				{
+					System.out.println("Wrong dimensions");
+					break load;
+				}
+				GridPanel.pixels = tmp;
+				PixelArtMaker.paint();
+				in.close();
+				file.close();
+				System.out.println("serialized");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }

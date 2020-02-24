@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 import javax.swing.JPanel;
 
-public class GridPanel extends JPanel implements Serializable{
+public class GridPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private int windowWidth;
@@ -18,7 +18,7 @@ public class GridPanel extends JPanel implements Serializable{
 	private int cols;
 	
 	//1. Create a 2D array of pixels. Do not initialize it yet.
-	Pixel[][] pixels;
+	static Pixel[][] pixels;
 	private Color color;
 	
 	public GridPanel(int w, int h, int r, int c) {
